@@ -99,6 +99,8 @@ public class ApplicationResource {
             keyType = Key.KeyType.XML;
         }
 
+
+
         Key cacheKey = new Key(
                 Key.EntityType.Application,
                 appName,
