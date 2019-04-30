@@ -8,7 +8,7 @@
 		<artifactId>micro-service-governing</artifactId>
 		<version>1.0</version>
 	</parent>
-
+	<!-- 项目  -->
 	<groupId>org.springcloud</groupId>
 	<artifactId>test-eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
