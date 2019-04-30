@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>服务治理中心</title>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        table {
+            margin: 100px auto;
+            border: 1px solid #000;
+            border-collapse: collapse; /*设置表格的边框是否被合并为一个单一的边框*/
+            border-spacing: 0; /*设置相邻单元格的边框间的距离*/
+        }
+
+        tr {
+            width: 300px;
+            height: 30px;
+            line-height: 50px;
+            border-bottom: 1px solid #000;
+            background-color: pink;
+        }
+
+        td, th {
+            width: 300px;
+            height: 25px;
+            line-height: 50px;
+            text-align: center;
+            border-right: 1px solid #000;
+            /*white-space: nowrap;*/
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <table>
+        <thead>
+        <tr>
+            <th>app</th>
+            <th>registryUrl</th>
+            <th>status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="info in appInfo">
+            <td v-text="info.app"></td>
+            <td v-text="info.registryUrl"></td>
+            <td v-text="info.status"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            appInfo: []
+        },
+        created: function () {
+            //为了在内部函数能使用外部函数的this对象，要给它赋值了一个名叫self的变量。
+            var self = this;
+            $.ajax({
+                url: 'http://localhost:30000/getApplicationInfo',
+                type: 'get',
+                data: {},
+                dataType: 'json'
+            }).then(function (res) {
+                console.log(res);
+                //把从json获取的数据赋值给数组
+                self.appInfo = res.result;
+            }).fail(function () {
+                console.log('失败');
+            })
+        }
+    })
+</script>
