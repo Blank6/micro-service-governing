@@ -43,7 +43,11 @@
     <loggers>
         <!--过滤掉spring无用的debug信息-->
         <logger name="org.springframework" level="error"></logger>
-
+        <!-- 将业务dao接口填写进去,并用控制台输出即可 -->
+        <logger name="org.springcloud.service.governing.dao" level="debug" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+        </logger>
         <root level="debug">
             <appender-ref ref="Console"/>
             <appender-ref ref="all"/>

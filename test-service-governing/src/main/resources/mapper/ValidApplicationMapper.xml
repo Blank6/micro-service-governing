@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springcloud.service.governing.dao.ValidApplicationDao">
-    <insert id="validApplication" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity">
-        INSERT INTO table_application_info (
-                app, registryUrl)
-        VALUE (
-                #{applicationEntity.app}, #{applicationEntity.registryUrl})
-    </insert>
+    <select id="validApplication" resultType="org.springcloud.service.governing.entity.request.ApplicationEntity">
+        SELECT * FROM table_application_info WHERE table_application_info.app=#{app}
+    </select>
+
+    <update id="updateStatus" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity">
+        UPDATE table_application_info SET table_application_info.STATUS = "enabled" WHERE table_application_info.app=#{app}
+    </update>
 </mapper>

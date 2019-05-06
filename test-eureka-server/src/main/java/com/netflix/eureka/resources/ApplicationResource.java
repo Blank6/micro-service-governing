@@ -41,7 +41,8 @@ import com.netflix.eureka.registry.Key;
 import com.netflix.eureka.util.EurekaMonitors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springcloud.eureka.server.aop.SelfFilter;
+import org.springcloud.eureka.server.Service.ValidService;
+import org.springcloud.eureka.server.entity.response.RespEntity;
 
 /**
  * A <em>jersey</em> resource that handles request related to a particular
@@ -164,7 +165,27 @@ public class ApplicationResource {
         } else if (info.getDataCenterInfo().getName() == null) {
             return Response.status(400).entity("Missing dataCenterInfo Name").build();
         }
-
+        /**************************************************************************************************************/
+        /**
+         * 携带service的基本信息去治理中心验证
+         */
+        /** 验证 **/
+        ValidService validService = new ValidService();
+        logger.info("ApplicationResource ********** 发送验证请求到治理中心");
+        logger.info("ApplicationResource ********** addInstance :" + info.getAppName());
+        RespEntity respEntity = validService.validClient("http://localhost:30000/validApplication", info);
+        try{
+            if (respEntity.getErrorCode() != 200) {
+                logger.info("ApplicationResource ********** 验证未通过：" + respEntity.toString());
+                return Response.status(400).entity("治理中心验证未通过").build();
+            }
+        } catch (Throwable throwable) {
+            logger.error("ApplicationResource ********** Validated error", throwable);
+        }
+        /**
+         * 通过验证，执行目标方法注册
+         */
+        /**************************************************************************************************************/
         // handle cases where clients may be registering with bad DataCenterInfo with missing data
         DataCenterInfo dataCenterInfo = info.getDataCenterInfo();
         if (dataCenterInfo instanceof UniqueIdentifier) {

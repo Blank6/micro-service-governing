@@ -11,4 +11,5 @@
     <select id="getApplicationInfo" resultType="org.springcloud.service.governing.entity.request.ApplicationEntity">
         SELECT * FROM table_application_info
     </select>
+
 </mapper>

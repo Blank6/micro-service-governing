@@ -18,4 +18,6 @@ public class EurekaServerApplication {
 	public RestTemplate restTemplate(){
 		return new RestTemplate();
 	}
+
+
 }

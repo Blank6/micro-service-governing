@@ -25,10 +25,16 @@ public class ApplicationService {
     ApplicationDao applicationDao;
 
     public Integer createApplication(ApplicationEntity applicationEntity) throws BusinessException {
-        String app = StringUtil.getRandomChar(5);
-        String registryUrl = "http://" + IPUtil.getRandomIp() + ":" + PortUtil.RandomPort() + "/eureka";
-        applicationEntity.setApp(app);
-        applicationEntity.setRegistryUrl(registryUrl);
+
+        if (applicationEntity.getApp() == null) {
+            String app = StringUtil.getRandomChar(5);
+            applicationEntity.setApp(app);
+        }
+        System.out.printf(applicationEntity.getRegistryUrl());
+        if (applicationEntity.getRegistryUrl() == null) {
+            String registryUrl = "http://" + IPUtil.getRandomIp() + ":" + PortUtil.RandomPort() + "/eureka";
+            applicationEntity.setRegistryUrl(registryUrl);
+        }
         System.out.printf(applicationEntity.toString());
         return applicationDao.createApplication(applicationEntity);
     }
