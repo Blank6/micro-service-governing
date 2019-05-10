@@ -1,16 +1,17 @@
 package org.springcloud.service.governing.service;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springcloud.service.governing.dao.ApplicationDao;
 import org.springcloud.service.governing.entity.request.ApplicationEntity;
+import org.springcloud.service.governing.entity.request.PageEntity;
 import org.springcloud.service.governing.execption.BusinessException;
 import org.springcloud.service.governing.util.IPUtil;
 import org.springcloud.service.governing.util.PortUtil;
 import org.springcloud.service.governing.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
 * @Description:    java类作用描述
@@ -30,7 +31,6 @@ public class ApplicationService {
             String app = StringUtil.getRandomChar(5);
             applicationEntity.setApp(app);
         }
-        System.out.printf(applicationEntity.getRegistryUrl());
         if (applicationEntity.getRegistryUrl() == null) {
             String registryUrl = "http://" + IPUtil.getRandomIp() + ":" + PortUtil.RandomPort() + "/eureka";
             applicationEntity.setRegistryUrl(registryUrl);
@@ -39,7 +39,19 @@ public class ApplicationService {
         return applicationDao.createApplication(applicationEntity);
     }
 
-    public List<ApplicationEntity> getApplicationInfo() throws BusinessException {
-        return applicationDao.getApplicationInfo();
+    public PageEntity getApplicationInfo(ApplicationEntity applicationEntity) throws BusinessException {
+        Integer pageNum = applicationEntity.getPageNum();
+        Integer pageSize = applicationEntity.getPageSize();
+        Integer tatalPage =  applicationDao.getApplicationInfo(applicationEntity).size();
+        //使用Mybatis分页插件
+        PageHelper.startPage(pageNum, pageSize);
+        //调用分页查询方法，其实就是查询所有数据，mybatis自动帮我们进行分页计算
+        Page<ApplicationEntity> appInfos = applicationDao.getApplicationInfo(applicationEntity);
+        System.out.println("ApplicationService" + appInfos.toString());
+        return new PageEntity<ApplicationEntity>(appInfos.getTotal(), appInfos.getResult());
+    }
+
+    public Integer deleteApplication(ApplicationEntity applicationEntity) throws BusinessException{
+        return applicationDao.deleteApplication(applicationEntity);
     }
 }

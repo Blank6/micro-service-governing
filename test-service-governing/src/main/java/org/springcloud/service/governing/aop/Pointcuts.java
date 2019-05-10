@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Configuration;
 @Aspect
 @Configuration
 public class Pointcuts {
-    @Pointcut(value = "execution(* com.test.service..*.*(..))")
+    @Pointcut(value = "execution(* org.springcloud.service.governing.service..*.*(..))")
     public void serviceCall() {}
 
-    @Pointcut(value = "execution(* com.test.controller..*.*(..))")
+    @Pointcut(value = "execution(* org.springcloud.service.governing.controller..*.*(..))")
     public void controllerCall() {}
 }
 

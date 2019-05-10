@@ -4,6 +4,7 @@ import org.springcloud.service.governing.entity.request.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @Description:    java类作用描述
@@ -12,7 +13,9 @@ import java.util.List;
 */
 @Repository
 public interface UserDao {
-    List<UserEntity> getUser();
+    List<UserEntity> getUsers();
 
     UserEntity getUserById(Integer userId);
+
+    List<UserEntity> getUserDbInfo(Map<String, Object> condition);
 }

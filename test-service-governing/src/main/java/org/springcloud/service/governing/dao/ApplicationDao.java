@@ -1,5 +1,6 @@
 package org.springcloud.service.governing.dao;
 
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springcloud.service.governing.entity.request.ApplicationEntity;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,8 @@ public interface ApplicationDao {
 
     Integer createApplication(@Param(value = "applicationEntity") ApplicationEntity applicationEntity);
 
-    List<ApplicationEntity> getApplicationInfo();
+    Page<ApplicationEntity> getApplicationInfo(ApplicationEntity applicationEntity);
+
+    Integer deleteApplication(ApplicationEntity applicationEntity);
 }
 

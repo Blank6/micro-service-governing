@@ -8,8 +8,14 @@
                 #{applicationEntity.app}, #{applicationEntity.registryUrl})
     </insert>
 
-    <select id="getApplicationInfo" resultType="org.springcloud.service.governing.entity.request.ApplicationEntity">
+    <select id="getApplicationInfo" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity" resultType="org.springcloud.service.governing.entity.request.ApplicationEntity">
         SELECT * FROM table_application_info
+        WHERE 1=1
+        <if test="app != null and app != ''"> AND table_application_info.app = #{app}</if>
     </select>
+
+    <delete id="deleteApplication" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity">
+        DELETE FROM table_application_info WHERE table_application_info.app = #{app}
+    </delete>
 
 </mapper>

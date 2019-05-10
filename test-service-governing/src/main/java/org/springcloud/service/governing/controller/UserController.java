@@ -7,6 +7,7 @@ import org.springcloud.service.governing.execption.BusinessException;
 import org.springcloud.service.governing.execption.ConstantResultCode;
 import org.springcloud.service.governing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,11 +28,11 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
-    public ResponseEntity getUser() {
+    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
+    public ResponseEntity getUsers() {
         List<UserEntity> userInfo = new ArrayList<UserEntity>();
         try {
-            userInfo = userService.getUser();
+            userInfo = userService.getUsers();
         } catch (BusinessException exp) {
             return new ResponseEntity(exp.getCode(), exp.getMessage());
         } catch (Throwable t) {
@@ -51,5 +52,28 @@ public class UserController {
             return new ResponseEntity(ConstantResultCode.ERROR, null);
         }
         return new ResponseEntity(ConstantResultCode.OK, userInfo);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity userLogin(@RequestBody UserEntity userLoginParam) {
+        UserEntity userInfo = null;
+
+        try {
+            userInfo = userService.userLogin(userLoginParam);
+        }
+        catch (BusinessException exp) {
+            return new ResponseEntity(
+                    exp.getCode(),
+                    exp.getMessage());
+        }
+        catch (Throwable t) {
+            return new ResponseEntity(
+                    ConstantResultCode.ERROR,
+                    null);
+        }
+
+        return new ResponseEntity(
+                ConstantResultCode.OK,
+                userInfo);
     }
 }

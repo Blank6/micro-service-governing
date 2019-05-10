@@ -1,6 +1,6 @@
 package org.springcloud.service.governing.entity.request;
 
-public class ApplicationEntity {
+public class ApplicationEntity extends BaseParamEntity{
 
     private String app;
     private String status;

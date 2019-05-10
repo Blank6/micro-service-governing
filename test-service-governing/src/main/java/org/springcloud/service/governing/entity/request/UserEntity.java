@@ -10,6 +10,16 @@ public class UserEntity extends BaseParamEntity{
     private String password;
     private String phone;
 
+    public UserEntity() {
+
+    }
+
+    public UserEntity(Integer userId, String userName, String token) {
+        super(token);
+        this.userId = userId;
+        this.userName = userName;
+    }
+
     public Integer getUserId() {
         return userId;
     }

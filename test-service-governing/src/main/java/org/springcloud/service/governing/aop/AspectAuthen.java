@@ -28,16 +28,17 @@ public class AspectAuthen {
     public Object controllerCallAround(ProceedingJoinPoint point) {
 
         Object result = null;
-//        try{
-//            if(validToken(point) == false){
-//                return new ResponseEntity(ConstantResultCode.TOKEN_ERROR, null);
-//            }
-//        } catch (Throwable throwable) {
-//            logger.error("Token Validated error", throwable);
-//        }
+        try{
+            if(validToken(point) == false){
+                return new ResponseEntity(ConstantResultCode.TOKEN_ERROR, null);
+            }
+        } catch (Throwable throwable) {
+            logger.error("Token Validated error", throwable);
+        }
 
         try{
             // 使用proceed()方法来执行目标方法
+            logger.info("使用proceed()方法来执行目标方法");
             result = point.proceed();
         } catch (Throwable throwable) {
             logger.error("Controller proceed error", throwable);
