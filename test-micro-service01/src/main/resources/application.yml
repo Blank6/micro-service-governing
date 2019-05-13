@@ -12,3 +12,8 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
       # http://service01:spdb1234@localhost:8761/eureka/
+
+
+
+
+

@@ -27,13 +27,13 @@ public class ApplicationService {
 
     public Integer createApplication(ApplicationEntity applicationEntity) throws BusinessException {
 
-        if (applicationEntity.getApp() == null) {
-            String app = StringUtil.getRandomChar(5);
-            applicationEntity.setApp(app);
+        if (applicationEntity.getServiceName() == null) {
+            String serviceName = StringUtil.getRandomChar(5);
+            applicationEntity.setServiceName(serviceName);
         }
-        if (applicationEntity.getRegistryUrl() == null) {
+        if (applicationEntity.getServiceRegistryUrl() == null) {
             String registryUrl = "http://" + IPUtil.getRandomIp() + ":" + PortUtil.RandomPort() + "/eureka";
-            applicationEntity.setRegistryUrl(registryUrl);
+            applicationEntity.setServiceRegistryUrl(registryUrl);
         }
         System.out.printf(applicationEntity.toString());
         return applicationDao.createApplication(applicationEntity);

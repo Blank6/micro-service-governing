@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springcloud.service.governing.dao.ApplicationDao">
+
+    <resultMap type="org.springcloud.service.governing.entity.request.ApplicationEntity" id="ApplicationEntityResultMap">
+        <result property="serviceId" column="service_id" ></result>
+        <result property="serviceName" column="service_name" ></result>
+        <result property="serviceSecret" column="service_secret"></result>
+        <result property="serviceRegistryUrl" column="service_registry_url"></result>
+        <result property="serviceStatus" column="service_status" ></result>
+        <result property="serviceDescription" column="service_description" ></result>
+        <result property="teamMembers" column="team_members"></result>
+        <result property="teamIntroduction" column="team_introduction"></result>
+    </resultMap>
+
     <insert id="createApplication" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity">
-        INSERT INTO table_application_info (
-                app, registryUrl)
+        INSERT INTO table_micro_service_info (
+                service_name, service_registry_url)
         VALUE (
-                #{applicationEntity.app}, #{applicationEntity.registryUrl})
+                #{serviceName}, #{serviceRegistryUrl})
     </insert>
 
-    <select id="getApplicationInfo" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity" resultType="org.springcloud.service.governing.entity.request.ApplicationEntity">
-        SELECT * FROM table_application_info
+    <select id="getApplicationInfo" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity" resultMap="ApplicationEntityResultMap">
+        SELECT * FROM table_micro_service_info
         WHERE 1=1
-        <if test="app != null and app != ''"> AND table_application_info.app = #{app}</if>
+        <if test="serviceName != null and serviceName != ''"> AND service_name = #{serviceName}</if>
     </select>
 
     <delete id="deleteApplication" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity">
-        DELETE FROM table_application_info WHERE table_application_info.app = #{app}
+        DELETE FROM table_micro_service_info WHERE service_name = #{serviceName}
     </delete>
 
 </mapper>

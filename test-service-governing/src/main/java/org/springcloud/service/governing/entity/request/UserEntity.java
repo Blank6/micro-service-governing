@@ -7,11 +7,10 @@ package org.springcloud.service.governing.entity.request;
 public class UserEntity extends BaseParamEntity{
     private Integer userId;
     private String userName;
-    private String password;
-    private String phone;
+    private String userPassword;
+    private String userPhone;
 
     public UserEntity() {
-
     }
 
     public UserEntity(Integer userId, String userName, String token) {
@@ -19,6 +18,7 @@ public class UserEntity extends BaseParamEntity{
         this.userId = userId;
         this.userName = userName;
     }
+
 
     public Integer getUserId() {
         return userId;
@@ -36,20 +36,20 @@ public class UserEntity extends BaseParamEntity{
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class UserEntity extends BaseParamEntity{
         return "UserEntity{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userPhone='" + userPhone + '\'' +
                 '}';
     }
 }

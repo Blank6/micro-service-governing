@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springcloud.service.governing.dao.UserDao">
+    <resultMap type="org.springcloud.service.governing.entity.request.UserEntity" id="UserEntityResultMap">
+        <result property="userId" column="user_id" ></result>
+        <result property="userName" column="user_name" ></result>
+        <result property="userPassword" column="user_password"></result>
+        <result property="userPhone" column="user_phone"></result>
+    </resultMap>
 
-    <select id="getUsers" resultType="org.springcloud.service.governing.entity.request.UserEntity">
+
+    <select id="getUsers" resultMap="UserEntityResultMap">
         SELECT * FROM table_user;
     </select>
 
-    <select id="getUserById" resultType="org.springcloud.service.governing.entity.request.UserEntity">
-        SELECT * FROM table_user WHERE userId = #{userId};
+    <select id="getUserById" parameterType="org.springcloud.service.governing.entity.request.UserEntity" resultMap="UserEntityResultMap">
+        SELECT * FROM table_user WHERE user_id = #{userId};
     </select>
 
-    <select id="getUserDbInfo" parameterType="java.util.Map" resultType="org.springcloud.service.governing.entity.request.UserEntity">
+    <select id="getUserDbInfo" parameterType="java.util.Map" resultMap="UserEntityResultMap">
         SELECT * FROM table_user WHERE 1=1
-        <if test="userId != null and userId != ''"> AND table_user.userId = #{userId}</if>
-        <if test="password != null and password != ''"> AND table_user.password = #{password}</if>
+        <if test="userId != null and userId != ''"> AND user_id = #{userId}</if>
+        <if test="userPassword != null and userPassword != ''"> AND user_password = #{userPassword}</if>
     </select>
 
 </mapper>

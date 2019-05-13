@@ -72,7 +72,7 @@ public class ApplicationController {
     @RequestMapping(value = "/getApplicationInfo", method = RequestMethod.POST)
     public ResponseEntity getApplicationInfo(@RequestBody ApplicationEntity applicationEntity) {
         PageEntity<ApplicationEntity> appInfo = new PageEntity();
-        System.out.println(applicationEntity.getApp());
+        System.out.println(applicationEntity.getServiceName());
         try {
             appInfo = applicationService.getApplicationInfo(applicationEntity);
             System.out.println(appInfo.toString());

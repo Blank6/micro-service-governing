@@ -19,7 +19,7 @@ public class ValidApplicationServcie {
     public List<ApplicationEntity> validApplication(ApplicationEntity applicationEntity) throws BusinessException {
         List<ApplicationEntity> ret = new ArrayList<ApplicationEntity>();
         try {
-             ret = validApplicationDao.validApplication(applicationEntity.getApp());
+             ret = validApplicationDao.validApplication(applicationEntity.getServiceName());
         }catch (Exception e){
 //            System.out.println(ret.toString() + "---------- ValidApplicationServcie " +  ret.size());
             e.printStackTrace();
@@ -28,6 +28,6 @@ public class ValidApplicationServcie {
     }
 
     public void updateStatus(ApplicationEntity applicationEntity) {
-        validApplicationDao.updateStatus(applicationEntity.getApp());
+        validApplicationDao.updateStatus(applicationEntity.getServiceName());
     }
 }

@@ -8,6 +8,7 @@ import org.springcloud.service.governing.execption.ConstantResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,13 @@ public class UserService {
     @Autowired
     UserDao userDao;
     public List<UserEntity> getUsers() throws BusinessException {
-        return userDao.getUsers();
+        List<UserEntity> userInfos= new ArrayList<>();
+        try{
+            userInfos = userDao.getUsers();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return userInfos;
     }
 
     public UserEntity getUserById(Integer userId) throws BusinessException {
@@ -35,7 +42,7 @@ public class UserService {
         Map<String, Object> condition = new HashMap<String, Object>();
         condition.put("userId", userLoginParam.getUserId());
         condition.put("userName", userLoginParam.getUserName());
-        condition.put("password", userLoginParam.getPassword());
+        condition.put("userPassword", userLoginParam.getUserPassword());
         //	condition.put("token", userLoginParam.getToken());
 //        if(userLoginParam.getCheckType().equals("L")){
 //            Integer ret = adminMngtDao.updateUserToken(condition);

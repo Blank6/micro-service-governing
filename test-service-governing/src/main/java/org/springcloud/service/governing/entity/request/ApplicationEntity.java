@@ -2,40 +2,90 @@ package org.springcloud.service.governing.entity.request;
 
 public class ApplicationEntity extends BaseParamEntity{
 
-    private String app;
-    private String status;
-    private String registryUrl;
+    private String serviceId;
+    private String serviceName;
+    private String serviceSecret;
+    private String serviceRegistryUrl;
+    private String serviceStatus;
+    private String serviceDescription;
+    private String teamMembers;
+    private String teamIntroduction;
 
-    public String getApp() {
-        return app;
+    public String getServiceId() {
+        return serviceId;
     }
 
-    public void setApp(String app) {
-        this.app = app;
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public String getRegistryUrl() {
-        return registryUrl;
+    public String getServiceSecret() {
+        return serviceSecret;
     }
 
-    public void setRegistryUrl(String registryUrl) {
-        this.registryUrl = registryUrl;
+    public void setServiceSecret(String serviceSecret) {
+        this.serviceSecret = serviceSecret;
+    }
+
+    public String getServiceRegistryUrl() {
+        return serviceRegistryUrl;
+    }
+
+    public void setServiceRegistryUrl(String serviceRegistryUrl) {
+        this.serviceRegistryUrl = serviceRegistryUrl;
+    }
+
+    public String getServiceStatus() {
+        return serviceStatus;
+    }
+
+    public void setServiceStatus(String serviceStatus) {
+        this.serviceStatus = serviceStatus;
+    }
+
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
+    public String getTeamMembers() {
+        return teamMembers;
+    }
+
+    public void setTeamMembers(String teamMembers) {
+        this.teamMembers = teamMembers;
+    }
+
+    public String getTeamIntroduction() {
+        return teamIntroduction;
+    }
+
+    public void setTeamIntroduction(String teamIntroduction) {
+        this.teamIntroduction = teamIntroduction;
     }
 
     @Override
     public String toString() {
-        return "apploicationEntity{" +
-                "app='" + app + '\'' +
-                ", status='" + status + '\'' +
-                ", registryUrl='" + registryUrl + '\'' +
+        return "ApplicationEntity{" +
+                "serviceId='" + serviceId + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", serviceSecret='" + serviceSecret + '\'' +
+                ", serviceRegistryUrl='" + serviceRegistryUrl + '\'' +
+                ", serviceStatus='" + serviceStatus + '\'' +
+                ", serviceDescription='" + serviceDescription + '\'' +
+                ", teamMembers='" + teamMembers + '\'' +
+                ", teamIntroduction='" + teamIntroduction + '\'' +
                 '}';
     }
 }

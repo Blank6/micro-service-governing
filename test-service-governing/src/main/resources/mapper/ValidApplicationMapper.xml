@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springcloud.service.governing.dao.ValidApplicationDao">
-    <select id="validApplication" resultType="org.springcloud.service.governing.entity.request.ApplicationEntity">
-        SELECT * FROM table_application_info WHERE table_application_info.app=#{app}
+
+
+    <resultMap type="org.springcloud.service.governing.entity.request.ApplicationEntity" id="ApplicationEntityResultMap">
+        <result property="serviceId" column="service_id" ></result>
+        <result property="serviceName" column="service_name" ></result>
+        <result property="serviceSecret" column="service_secret"></result>
+        <result property="serviceRegistryUrl" column="service_registry_url"></result>
+        <result property="serviceStatus" column="service_status" ></result>
+        <result property="serviceDescription" column="service_description" ></result>
+        <result property="teamMembers" column="team_members"></result>
+        <result property="teamIntroduction" column="team_introduction"></result>
+    </resultMap>
+
+    <select id="validApplication" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity" resultMap="ApplicationEntityResultMap">
+        SELECT * FROM table_micro_service_info WHERE service_name = #{serviceName}
     </select>
 
     <update id="updateStatus" parameterType="org.springcloud.service.governing.entity.request.ApplicationEntity">
-        UPDATE table_application_info SET table_application_info.STATUS = "enabled" WHERE table_application_info.app=#{app}
+        UPDATE table_micro_service_info SET service_status = "enabled" WHERE service_name = #{serviceName}
     </update>
 </mapper>
